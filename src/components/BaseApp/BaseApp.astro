@@ -1,0 +1,47 @@
+---
+import {AudioPlayer} from '../AudioPlayer/AudioPlayer.jsx'
+
+export interface Props {
+  appName: string;
+}
+const { appName } = Astro.props;
+
+---
+
+<div>
+
+<span
+id='box'
+  class="app-name"
+  data-appName={appName}
+>
+  {appName}        
+<AudioPlayer client:idle/>
+
+</span>
+</div>
+
+
+<style>
+    .app-name{
+      cursor: grab;
+      border: 1px solid #ccc;
+      z-index: 9;
+      position:absolute;
+      background-color: green;
+      height: 350px;
+      width: 350px;
+
+    } 
+
+    .webgl {
+
+      width: 100px;
+      height: 100px;
+    }
+
+</style>
+
+
+
+<script src={Astro.resolve('./myScript.js')} type="module"/>
