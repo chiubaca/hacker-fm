@@ -61,11 +61,11 @@ export default class AudioPlayerManager {
     /**
      * Orb
      */
-    const orbGeometry = new THREE.IcosahedronGeometry(1, 128);
+    const orbGeometry = new THREE.IcosahedronGeometry(1, 10);
 
     const orbMaterial = new THREE.ShaderMaterial({
       wireframe: true,
-      blending: THREE.AdditiveBlending,
+      // blending: THREE.AdditiveBlending,
       transparent: true,
       vertexShader,
       fragmentShader,
