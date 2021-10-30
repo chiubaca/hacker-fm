@@ -8,23 +8,28 @@ const { appName } = Astro.props;
 
 ---
 
-<div>
-
-<span
-id='box'
+<div
+  id='box'
   class="app-name"
   data-appName={appName}
 >
-  {appName}        
-<AudioPlayer client:idle/>
+<div class="top-bar">{appName}  </div>
 
-</span>
+
+  <AudioPlayer client:idle/>
+
 </div>
 
 
+
 <style>
+  .top-bar{
+    cursor: grab;
+    background-color: gray;
+    width: 100%;
+  }
+
     .app-name{
-      cursor: grab;
       border: 1px solid #ccc;
       z-index: 9;
       position:absolute;

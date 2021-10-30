@@ -2,7 +2,7 @@ import { dragmove } from "@knadh/dragmove";
 
 const target = document.querySelector("#box");
 
-const dragHandler = document.querySelector("#box");
+const dragHandler = document.querySelector(".top-bar");
 
 const snapThreshold = 1;
 function onStart(el, x, y) {
