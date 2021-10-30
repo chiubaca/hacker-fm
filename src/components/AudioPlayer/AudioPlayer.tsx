@@ -61,6 +61,7 @@ export function AudioPlayer() {
     <div>
       <audio
         crossOrigin="anonymous"
+        autoplay
         controls
         ref={audioElement}
         src={PLAYLIST[0].url}
