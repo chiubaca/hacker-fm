@@ -1,16 +1,15 @@
 import * as THREE from "three";
-import { OrbitControls } from "three-orbitcontrols-ts";
-import { fragmentShader, vertexShader } from "./orbShader";
-
 import * as Meyda from "meyda";
 
-interface Song {
+import { fragmentShader, vertexShader } from "./orbShader";
+
+export interface Song {
+  index: number;
   url: string;
   name: string;
 }
 
-/**  @type {Record<string, any>}  */
-const uniforms = {
+const uniforms: Record<string, any> = {
   uFrequency: { value: 1 },
   uAmplitude: { value: 4 },
   uDensity: { value: 1 },
@@ -26,43 +25,35 @@ const uniforms = {
 };
 
 export default class AudioPlayerManager {
-  playerElem: any;
-  audio: Song[];
-  currentAudio: HTMLAnchorElement | undefined;
+  playlist: Song[];
   audioElem: HTMLAudioElement;
-  playListElem: HTMLDivElement | undefined;
   audioContext: AudioContext | undefined;
-  canvas: HTMLElement;
-  // audioContext: null;
+  canvasElem: HTMLElement;
+  currentSongId: number;
 
   constructor(
-    canvas: HTMLElement,
-    selector: string,
-    audio: Song[] = [],
-    audioElem: HTMLAudioElement
+    canvasElem: HTMLElement,
+    audioElem: HTMLAudioElement,
+    playlist: Song[] = []
   ) {
-    this.playerElem = document.querySelector(selector);
-    this.audio = audio;
-    this.currentAudio = undefined;
-    // this.createPlayerElements();
+    this.playlist = playlist;
     this.audioContext = undefined;
-    this.canvas = canvas;
+    this.canvasElem = canvasElem;
     this.audioElem = audioElem;
 
-    this.audioEventHandler();
     this.createScene();
-  }
-  audioEventHandler() {
-    this.audioElem.addEventListener("play", () => {
-      console.log("play...");
-      this.startAudio();
-    });
-  }
-  startAudio() {
-    console.log("start audio");
-    this.audioElem.play();
     this.createVisualizer();
   }
+
+  playTrack() {
+    this.audioElem.paused ? this.audioElem.play() : this.audioElem.pause();
+  }
+
+  changeTrack(track: Song) {
+    this.audioElem.src = track.url;
+    this.audioElem.play();
+  }
+
   createScene() {
     // Scene
     const scene = new THREE.Scene();
@@ -70,7 +61,6 @@ export default class AudioPlayerManager {
     /**
      * Orb
      */
-
     const orbGeometry = new THREE.IcosahedronGeometry(1, 128);
 
     const orbMaterial = new THREE.ShaderMaterial({
@@ -107,16 +97,11 @@ export default class AudioPlayerManager {
     camera.position.z = 3;
     scene.add(camera);
 
-    // Controls
-    const controls = new OrbitControls(camera, this.canvas);
-    controls.enableDamping = true;
-    controls.autoRotate = true;
-
     /**
      * Renderer
      */
     const renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
+      canvas: this.canvasElem,
     });
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -124,21 +109,12 @@ export default class AudioPlayerManager {
     /**
      * Animate
      */
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      // const elapsedTime = clock.getElapsedTime();
-
-      // Update controls
-      controls.update();
-
+      orbGeometry.rotateY(0.01);
       // Render
       renderer.render(scene, camera);
-
-      // Call tick again on the next frame
       requestAnimationFrame(tick);
     };
-
     tick();
   }
 
@@ -146,7 +122,6 @@ export default class AudioPlayerManager {
     if (!this.audioElem) {
       return;
     }
-    // this.audioElem.play();
 
     this.audioContext = new AudioContext();
 
@@ -157,9 +132,7 @@ export default class AudioPlayerManager {
 
     src.connect(analyser);
     analyser.connect(this.audioContext.destination);
-    analyser.fftSize = 256 * 4;
-
-    const bufferLength = analyser.frequencyBinCount;
+    analyser.fftSize = 256;
 
     function bound(_number: number, _min: number, _max: number) {
       return Math.max(Math.min(_number, _max), _min);
@@ -187,85 +160,11 @@ export default class AudioPlayerManager {
       // calculates a new level. This function will be called around 86 times per
       // second.
       callback: (features) => {
-        console.log(
-          "Meyda",
-          features.rms,
-          bound(features.energy as number, 0, 10)
-        );
         uniforms.uStrength.value = bound(features.rms as number, 0, 10) * 2;
         uniforms.uDensity.value = bound(features.energy as number, 0, 2) * 2;
       },
     });
 
     analyzer.start();
-  }
-
-  createPlayerElements() {
-    this.audioElem = document.createElement("audio");
-    const playListElem = document.createElement("div");
-
-    this.playerElem.appendChild(this.audioElem);
-    this.playerElem.appendChild(playListElem);
-    this.createPlayListElements(playListElem);
-  }
-
-  createPlayListElements(playListElem: HTMLDivElement) {
-    this.audio.forEach((audio) => {
-      const audioItem = document.createElement("a");
-      audioItem.href = audio.url;
-      audioItem.innerHTML = `${audio.name}`;
-
-      this.setupEventListeners(audioItem);
-      playListElem.appendChild(audioItem);
-    });
-  }
-
-  setupEventListeners(audioItem: HTMLAnchorElement) {
-    audioItem.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      if (!this.audioContext) {
-        console.log("test leggo");
-        this.createVisualizer();
-      }
-
-      const isCurrentAudio =
-        audioItem.getAttribute("href") ===
-        (this.currentAudio && this.currentAudio.getAttribute("href"));
-
-      if (isCurrentAudio && !this.audioElem!.paused) {
-        // this.setPlayIcon(this.currentAudio);
-        this.audioElem!.pause();
-      } else if (isCurrentAudio && this.audioElem!.paused) {
-        // this.setPauseIcon(this.currentAudio);
-        this.audioElem!.play();
-      } else {
-        this.currentAudio = audioItem;
-        // this.setPauseIcon(this.currentAudio);
-
-        if (!this.audioElem) {
-          return;
-        }
-
-        this.audioElem.src = this.currentAudio.getAttribute("href") || "";
-        this.audioElem!.play();
-      }
-    });
-  }
-  setPauseIcon(currentAudioElement: HTMLAnchorElement | undefined) {
-    if (!currentAudioElement) {
-      return;
-    }
-    const icon = currentAudioElement.querySelector("i");
-    icon!.classList.remove("fa-pause");
-    icon!.classList.add("fa-play");
-  }
-  setPlayIcon(currentAudioElement: HTMLAnchorElement | undefined) {
-    if (!currentAudioElement) {
-      return;
-    }
-    const icon = currentAudioElement.querySelector("i");
-    icon!.classList.remove("fa-pause");
-    icon!.classList.add("fa-play");
   }
 }
