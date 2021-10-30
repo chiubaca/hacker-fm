@@ -61,8 +61,8 @@ export function AudioPlayer() {
     <div>
       <audio
         crossOrigin="anonymous"
-        autoplay
-        muted="muted"
+        webkit-playsinline="true"
+        playsinline="true"
         controls
         ref={audioElement}
         src={PLAYLIST[0].url}
