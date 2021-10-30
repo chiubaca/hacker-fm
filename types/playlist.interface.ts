@@ -36,7 +36,7 @@ export interface User {
   track_count: number;
 }
 
-export interface Playlist {
+export interface Track {
   artwork: Artwork;
   description: string;
   genre: string;
@@ -54,3 +54,5 @@ export interface Playlist {
   play_count: number;
   permalink: string;
 }
+
+export type Playlist = Track[];

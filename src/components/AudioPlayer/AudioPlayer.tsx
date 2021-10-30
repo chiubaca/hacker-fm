@@ -1,20 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import AudioPlayerManager from "./AudioPlayerManager";
 
-const playList = [
-  {
-    url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
-    name: "vapour1 ",
-  },
-  {
-    url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
-    name: "vapour2 ",
-  },
-  {
-    url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
-    name: "vapour3 ",
-  },
-];
+import playlist from "../../../public/playlist.json";
+import { Playlist } from "../../../types/playlist.interface";
+
+const parsedData = JSON.parse(playlist) as unknown as Playlist;
+
+const playList = parsedData.map((track) => {
+  return {
+    name: track.title,
+    url: `https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/${track.id}/stream?app_name=HACKERFM`,
+  };
+});
+
+// const playList = [
+//   {
+//     url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
+//     name: "vapour1 ",
+//   },
+//   {
+//     url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
+//     name: "vapour2 ",
+//   },
+//   {
+//     url: "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP",
+//     name: "vapour3 ",
+//   },
+// ];
 
 export function AudioPlayer() {
   const canvasContainer = useRef<HTMLCanvasElement>(null!);
