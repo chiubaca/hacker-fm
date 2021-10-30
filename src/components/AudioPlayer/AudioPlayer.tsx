@@ -28,7 +28,7 @@ export function AudioPlayer() {
       audioElement.current,
       PLAYLIST
     );
-    AudioPlayerRef.current.playTrack();
+    // AudioPlayerRef.current.playTrack();
   }, []);
 
   const playNextTrackHandler = () => {
@@ -61,8 +61,6 @@ export function AudioPlayer() {
     <div>
       <audio
         crossOrigin="anonymous"
-        webkit-playsinline="true"
-        playsinline="true"
         controls
         ref={audioElement}
         src={PLAYLIST[0].url}
