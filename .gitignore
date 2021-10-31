@@ -19,3 +19,6 @@ yarn-error.log*
 
 # project files
 public/playlist.json
+
+# Local Netlify folder
+.netlify
