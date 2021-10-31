@@ -1,0 +1,125 @@
+/* 
+Adapted from the amazing work of: https://gist.github.com/codingdudecom
+
+Codepen - https://codepen.io/inegoita/pen/BgdXMw
+Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d411be6
+*/
+
+.grid {
+  position: absolute;
+  bottom: -30%;
+  left: 0;
+  margin-left: -50%;
+  width: 200%;
+  height: 100%;
+  background-position-y: 0px;
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--grid-color, black) 0%,
+      transparent calc(1px + var(--grid-blur, 0px)),
+      transparent var(--grid-size),
+      var(--grid-color, black)
+        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--grid-color, black) 0%,
+      transparent calc(1px + var(--grid-blur, 0px)),
+      transparent var(--grid-size),
+      var(--grid-color, black)
+        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
+    );
+  transform: perspective(50vh) rotateX(60deg) translateZ(10px);
+  animation: moving-grid 0.5s infinite linear;
+  z-index: -1;
+}
+
+@keyframes moving-grid {
+  0% {
+    transform: perspective(50vh) rotateX(60deg) translateZ(10px)
+      translateY(-var(--grid-size));
+  }
+  100% {
+    transform: perspective(50vh) rotateX(60deg) translateZ(10px)
+      translateY(var(--grid-size));
+  }
+}
+
+.background-80s {
+  background: linear-gradient(
+      to bottom,
+      #010310 0,
+      #0c1142 24%,
+      #45125e 45%,
+      #d53567 60%,
+      #f0c3d9 65%,
+      #0c1142 65%
+    )
+    fixed;
+  background-size: 100% var(--background-height, 100vh);
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: var(--background-height, 100vh);
+  z-index: -2;
+}
+
+.background-80s:before {
+  content: "";
+  background: linear-gradient(
+      to bottom,
+      #010310 0,
+      #0c1142 24%,
+      #45125e 45%,
+      #d53567 60%,
+      #f0c3d9 65%,
+      #0c1142 65%
+    )
+    fixed;
+  width: 100%;
+  height: 55%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  opacity: 0.2;
+}
+
+/*stars*/
+.stars:after {
+  transform: translateY(-40%);
+  content: " ";
+  border-radius: 100%;
+  width: 3px;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  box-shadow: 5vw 15vh 2px white, 1vw 33vh 0px white, 2vw 25vh 2px white,
+    10vw 10vh 2px white, 12vw 20vh 0px white, 30vw 15vh 2px white,
+    16vw 5vh 2px white, 24vw 10vh 0px white, 32vw 40vh 0px white,
+    33vw 35vh 2px white, 12vw 38vh 2px white, 24vw 10vh 0px white,
+    33vw 5vh 2px white, 20vw 10vh 0px white, 80vw 10vh 2px white,
+    62vw 20vh 0px white, 60vw 15vh 2px white, 70vw 7vh 0px white,
+    62vw 50vh 0px white, 65vw 35vh 2px white, 64vw 10vh 0px white,
+    85vw 2vh 0px white, 92vw 40vh 0px white, 75vw 35vh 2px white,
+    90vw 10vh 0px white;
+  opacity: 0.3;
+  animation: glitter 2s infinite;
+}
+
+@keyframes glitter {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}
