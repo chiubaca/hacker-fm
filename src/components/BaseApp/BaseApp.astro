@@ -14,14 +14,8 @@ const { appName } = Astro.props;
   data-appName={appName}
 >
 <div class="top-bar">{appName}  </div>
-
-
-  <AudioPlayer client:idle/>
-
+  <AudioPlayer client:visible/>
 </div>
-
-
-
 <style>
   .top-bar{
     cursor: grab;
