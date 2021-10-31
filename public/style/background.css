@@ -34,6 +34,13 @@ Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d41
   z-index: -1;
 }
 
+/* Tone down the animation to avoid vestibular motion triggers like scaling or panning large objects. */
+@media (prefers-reduced-motion) {
+  .grid {
+    animation: none;
+  }
+}
+
 @keyframes moving-grid {
   0% {
     transform: perspective(50vh) rotateX(60deg) translateZ(10px)
