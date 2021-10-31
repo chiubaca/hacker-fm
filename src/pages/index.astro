@@ -1,40 +1,74 @@
 ---
-// // Component Imports
-// import Tour from '../components/Tour.astro';
-// // You can import components from any supported Framework here!
-// import PreactCounter from '../components/PreactCounter.jsx';
-// import ReactCounter from '../components/ReactCounter.jsx';
-// import SvelteCounter from '../components/SvelteCounter.svelte';
-// import VueCounter from '../components/VueCounter.vue';
 import BaseApp from '../components/BaseApp/BaseApp.astro';
 
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
-let title = 'My Astro Site';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+let title = 'H4CKER.FM';
 ---
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>{title}</title>
-
-            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/style/global.css">
         <link rel="stylesheet" href="/style/home.css">
     </head>
 <body>
-    <main id='desktop-screen'>
+ 
+    <section class='loading-background'>
+    </section>
+
+    <main class='desktop-screen hide'>
+    
       <BaseApp appName='app1'/>
 
-      
     </main>
+       <div class="crt-overlay-effect"></div> 
 </body>
 </html>
 
+
+<script>
+
+const text = 
+`
+Initialising boot sequence...
+Installing cyberspace.exe...
+
+
+██╗__██╗██╗__██╗_██████╗██╗__██╗███████╗██████╗____███████╗███╗___███╗
+██║__██║██║__██║██╔════╝██║_██╔╝██╔════╝██╔══██╗___██╔════╝████╗_████║
+███████║███████║██║_____█████╔╝_█████╗__██████╔╝___█████╗__██╔████╔██║
+██╔══██║╚════██║██║_____██╔═██╗_██╔══╝__██╔══██╗___██╔══╝__██║╚██╔╝██║
+██║__██║_____██║╚██████╗██║__██╗███████╗██║__██║██╗██║_____██║_╚═╝_██║
+╚═╝__╚═╝_____╚═╝_╚═════╝╚═╝__╚═╝╚══════╝╚═╝__╚═╝╚═╝╚═╝_____╚═╝_____╚═╝
+                                             
+                                             Press any key to continue...
+`
+
+const loaderScreen = document.querySelector('.loading-background');
+const desktopScreen = document.querySelector('.desktop-screen');
+
+loaderScreen.addEventListener('click', () => {
+    console.log('clicked');
+    loaderScreen.classList.add('hide');
+    desktopScreen.classList.remove('hide');
+});
+
+
+document.addEventListener('keydown', (e) => {
+    loaderScreen.classList.add('hide');
+    desktopScreen.classList.remove('hide');
+});
+
+const CHARS_PER_STROKE = 2;
+var startIndex = 0;
+var endIndex = 0;
+
+const updateScreen = (e) => {
+    endIndex += CHARS_PER_STROKE;
+    loaderScreen.textContent = text.substring(startIndex, endIndex);
+    window.requestAnimationFrame(updateScreen);
+};
+updateScreen()
+</script>
 
