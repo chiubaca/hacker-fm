@@ -5,62 +5,15 @@ Codepen - https://codepen.io/inegoita/pen/BgdXMw
 Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d411be6
 */
 
-.grid {
-  position: absolute;
-  bottom: -30%;
-  left: 0;
-  margin-left: -50%;
-  width: 200%;
-  height: 100%;
-  background-position-y: 0px;
-  background-image: repeating-linear-gradient(
-      90deg,
-      var(--grid-color, black) 0%,
-      transparent calc(1px + var(--grid-blur, 0px)),
-      transparent var(--grid-size),
-      var(--grid-color, black)
-        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
-    ),
-    repeating-linear-gradient(
-      180deg,
-      var(--grid-color, black) 0%,
-      transparent calc(1px + var(--grid-blur, 0px)),
-      transparent var(--grid-size),
-      var(--grid-color, black)
-        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
-    );
-  transform: perspective(50vh) rotateX(60deg) translateZ(10px);
-  animation: moving-grid 0.5s infinite linear;
-  z-index: -1;
-}
-
-/* Tone down the animation to avoid vestibular motion triggers like scaling or panning large objects. */
-@media (prefers-reduced-motion) {
-  .grid {
-    animation: none;
-  }
-}
-
-@keyframes moving-grid {
-  0% {
-    transform: perspective(50vh) rotateX(60deg) translateZ(10px)
-      translateY(-var(--grid-size));
-  }
-  100% {
-    transform: perspective(50vh) rotateX(60deg) translateZ(10px)
-      translateY(var(--grid-size));
-  }
-}
-
 .background-80s {
   background: linear-gradient(
       to bottom,
       #010310 0,
-      #0c1142 24%,
-      #45125e 45%,
-      #d53567 60%,
-      #f0c3d9 65%,
-      #0c1142 65%
+      #0c1142 90%,
+      #45125e 92%,
+      #d53567 95%,
+      #f0c3d9 98%,
+      #0c1142 100%
     )
     fixed;
   background-size: 100% var(--background-height, 100vh);
@@ -69,29 +22,8 @@ Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d41
   left: 0;
   top: 0;
   width: 100vw;
-  height: var(--background-height, 100vh);
+  height: 100vh;
   z-index: -2;
-}
-
-.background-80s:before {
-  content: "";
-  background: linear-gradient(
-      to bottom,
-      #010310 0,
-      #0c1142 24%,
-      #45125e 45%,
-      #d53567 60%,
-      #f0c3d9 65%,
-      #0c1142 65%
-    )
-    fixed;
-  width: 100%;
-  height: 55%;
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  top: 0;
-  opacity: 0.2;
 }
 
 /*stars*/
