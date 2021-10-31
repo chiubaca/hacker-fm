@@ -28,7 +28,7 @@ export function AudioPlayer() {
       audioElement.current,
       PLAYLIST
     );
-    // AudioPlayerRef.current.playTrack();
+    AudioPlayerRef.current.playTrack();
   }, []);
 
   const playNextTrackHandler = () => {
