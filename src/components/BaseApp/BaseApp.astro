@@ -12,6 +12,7 @@ const { appName } = Astro.props;
   id='box'
   class="app-name"
   data-appName={appName}
+  data-drag-boundary="true"
 >
 <div class="top-bar">{appName}  </div>
   <AudioPlayer client:visible/>
