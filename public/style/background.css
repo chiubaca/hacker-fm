@@ -5,15 +5,44 @@ Codepen - https://codepen.io/inegoita/pen/BgdXMw
 Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d411be6
 */
 
+:root {
+  --grid-color: rgba(115, 59, 139, 0.7);
+  --grid-size: 15px;
+  --grid-blur: 0px;
+}
+
+.grid {
+  position: fixed;
+  width: 90%;
+  height: 30%;
+  background-image: repeating-linear-gradient(
+      90deg,
+      transparent calc(1px + var(--grid-blur)),
+      transparent var(--grid-size),
+      var(--grid-color, black)
+        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--grid-color, black) 6%,
+      transparent calc(1px + var(--grid-blur, 0px)),
+      transparent var(--grid-size),
+      var(--grid-color, black)
+        calc(var(--grid-size) + 1px + var(--grid-blur, 0px))
+    );
+  transform: perspective(10vh) rotateX(47deg) translateZ(41px);
+  bottom: 12vh;
+}
+
 .background-80s {
   background: linear-gradient(
       to bottom,
       #010310 0,
-      #0c1142 90%,
-      #45125e 92%,
-      #d53567 95%,
-      #f0c3d9 98%,
-      #0c1142 100%
+      #0c1142 24%,
+      #45125e 45%,
+      #d53567 60%,
+      #f0c3d9 65%,
+      #0c1142 65%
     )
     fixed;
   background-size: 100% var(--background-height, 100vh);
@@ -23,7 +52,7 @@ Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d41
   top: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -2;
+  z-index: -999;
 }
 
 /*stars*/
