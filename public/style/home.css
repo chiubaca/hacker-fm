@@ -15,20 +15,9 @@
   overflow: hidden;
 }
 
-.crt-overlay-effect {
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-image: repeating-linear-gradient(
-    rgba(0, 0, 0, 0.3) 0,
-    transparent 1px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.3) 3px
-  );
-  pointer-events: none;
+.desktop-screen {
+  height: 100vh;
+  width: 100vw;
 }
 
 .hide {
