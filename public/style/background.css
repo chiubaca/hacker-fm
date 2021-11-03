@@ -129,7 +129,7 @@ Github Gist - https://gist.github.com/codingdudecom/1f9c416339fb7dcb7cef12170d41
 }
 
 /* turn off the grid on narrow screens */
-@media screen and (max-height: 500px) {
+@media screen and (max-width: 500px) {
   .grid {
     width: 0%;
     height: 0%;
