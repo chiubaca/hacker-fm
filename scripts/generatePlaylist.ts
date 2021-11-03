@@ -8,7 +8,7 @@ import { Playlist } from "../types/playlist.interface";
 
 async function generatePlaylist() {
   const resp = await axios.get(
-    "https://disc-gru01.audius.hashbeam.com/v1/playlists/nVmr6/tracks?app_name=HACKERFM",
+    "https://audius-disco.dfw-x02.us.supercache.org/v1/playlists/nVmr6/tracks?app_name=HACKERFM",
     {
       headers: {
         Accept: "application/json",
