@@ -6,9 +6,30 @@ import * as fs from "fs";
 import axios from "axios";
 import { Playlist } from "../types/playlist.interface";
 
-async function generatePlaylist() {
+const AUDIUS_ENDPOINT = "https://api.audius.co";
+const APP_NAME = "HACKERFM";
+const hackerPlaylist = "nVmr6";
+const lofiNightsPlaylist = "nqZmb";
+
+async function getAvailableHostUrl() {
+  const resp = await axios.get(AUDIUS_ENDPOINT, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  return resp.data.data;
+}
+
+async function generatePlaylist(
+  hostURL: string,
+  playlist: string,
+  appName: string
+) {
+  console.log(`Fetching playlist ${playlist} from ${hostURL}`);
+
   const resp = await axios.get(
-    "https://audius-disco.dfw-x02.us.supercache.org/v1/playlists/nVmr6/tracks?app_name=HACKERFM",
+    `${hostURL}/v1/playlists/${playlist}/tracks?app_name=${appName}`,
     {
       headers: {
         Accept: "application/json",
@@ -25,7 +46,7 @@ async function generatePlaylist() {
     (err) => {
       if (err) {
         console.error(
-          "An error occured while writing JSON Object to File.",
+          "An error occurred while writing JSON Object to File.",
           err
         );
         return err;
@@ -36,4 +57,6 @@ async function generatePlaylist() {
   );
 }
 
-generatePlaylist();
+getAvailableHostUrl().then((resp) =>
+  generatePlaylist(resp[0], hackerPlaylist, APP_NAME)
+);
