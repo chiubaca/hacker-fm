@@ -9,14 +9,20 @@ const { appName } = Astro.props;
 
 <div class='music-app-desktop-icon'/>
 
-
 <div
   class="music-app"
   data-appName={appName}
   data-drag-boundary="true"
 >
 <div class="crt-overlay-effect"/>
-<div class="music-app-top-bar"> {appName} </div>
+<div class="music-app-top-bar"> 
+  <span>{appName}</span> 
+  <span class='close-app'> 
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"  preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
+      <path d="M16 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2.939 12.789L10 11.729l-3.061 3.06l-1.729-1.728L8.271 10l-3.06-3.061L6.94 5.21L10 8.271l3.059-3.061l1.729 1.729L11.729 10l3.06 3.061l-1.728 1.728z" fill="currentColor"></path>
+    </svg>
+  </span>
+</div>
   <AudioPlayer client:visible/>
 </div>
 
@@ -44,8 +50,9 @@ const { appName } = Astro.props;
     border: 1px dashed #f5f5f580;
   }
  
-
-  .music-app-top-bar{
+  .music-app-top-bar{;
+    display: flex;
+    justify-content: space-between;
     cursor: grab;
     background-color: gray;
     width: 100%;
@@ -59,9 +66,16 @@ const { appName } = Astro.props;
     background-color: black;
   }
 
-  .webgl {
-    width: 100px;
-    height: 100px;
+  .close-app{
+    cursor: pointer;
+  } 
+
+  .close-app svg{
+    width: 20px;
+  }
+
+  .close-app svg:hover{
+    color: #a11010
   }
 
 </style>

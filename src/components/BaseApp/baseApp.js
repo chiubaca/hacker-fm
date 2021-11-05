@@ -41,11 +41,12 @@ const appDesktopIcon = document.querySelector(".music-app-desktop-icon");
 const audio = document.querySelector("audio");
 
 appDesktopIcon.addEventListener("click", () => {
-  if (target.style.visibility === "hidden") {
-    target.style.visibility = "visible";
-    audio.play();
-  } else {
-    target.style.visibility = "hidden";
-    audio.pause();
-  }
+  target.style.visibility = "visible";
+  audio.play();
+});
+
+const closeAppButton = document.querySelector(".close-app");
+closeAppButton.addEventListener("click", () => {
+  target.style.visibility = "hidden";
+  audio.pause();
 });
