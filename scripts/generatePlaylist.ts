@@ -58,5 +58,5 @@ async function generatePlaylist(
 }
 
 getAvailableHostUrl().then((resp) =>
-  generatePlaylist(resp[0], hackerPlaylist, APP_NAME)
+  generatePlaylist(resp[0], lofiNightsPlaylist, APP_NAME)
 );
