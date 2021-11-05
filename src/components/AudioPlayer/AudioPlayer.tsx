@@ -24,6 +24,7 @@ export function AudioPlayer() {
   const AudioPlayerRef = useRef<AudioPlayerManager>(null!);
 
   const [selectedTrack, setSelectedTrack] = useState<Song>(PLAYLIST[0]);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
   useEffect(() => {
     AudioPlayerRef.current = new AudioPlayerManager(
@@ -33,6 +34,12 @@ export function AudioPlayer() {
     );
     AudioPlayerRef.current.playTrack();
   }, []);
+
+  const playSongHandler = () => {
+    AudioPlayerRef.current.playTrack();
+
+    isPlaying ? setIsPlaying(false) : setIsPlaying(true);
+  };
 
   const playNextTrackHandler = () => {
     if (selectedTrack.index === PLAYLIST.length - 1) {
@@ -113,16 +120,26 @@ export function AudioPlayer() {
               ></path>
             </svg>
           </div>
-          <div
-            className="player-controls__button"
-            onClick={() => AudioPlayerRef.current.playTrack()}
-          >
-            <svg viewBox="0 0 512 512">
-              <path
-                d="M190.06 414l163.12-139.78a24 24 0 0 0 0-36.44L190.06 98c-15.57-13.34-39.62-2.28-39.62 18.22v279.6c0 20.5 24.05 31.56 39.62 18.18z"
-                fill="currentColor"
-              ></path>
-            </svg>
+          <div className="player-controls__button" onClick={playSongHandler}>
+            {isPlaying ? (
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M190.06 414l163.12-139.78a24 24 0 0 0 0-36.44L190.06 98c-15.57-13.34-39.62-2.28-39.62 18.22v279.6c0 20.5 24.05 31.56 39.62 18.18z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M199.9 416h-63.8c-4.5 0-8.1-3.6-8.1-8V104c0-4.4 3.6-8 8.1-8h63.8c4.5 0 8.1 3.6 8.1 8v304c0 4.4-3.6 8-8.1 8z"
+                  fill="currentColor"
+                ></path>
+                <path
+                  d="M375.9 416h-63.8c-4.5 0-8.1-3.6-8.1-8V104c0-4.4 3.6-8 8.1-8h63.8c4.5 0 8.1 3.6 8.1 8v304c0 4.4-3.6 8-8.1 8z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            )}
           </div>
           <div
             className="player-controls__button"
