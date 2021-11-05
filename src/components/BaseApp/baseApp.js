@@ -5,7 +5,7 @@ const dragHandler = document.querySelector(".music-app-top-bar");
 
 // Initial position of the music app
 target.style.bottom = `4rem`;
-target.style.left = `2rem`;
+target.style.left = `1.5rem`;
 
 const snapThreshold = 1;
 function onStart(el, x, y) {
