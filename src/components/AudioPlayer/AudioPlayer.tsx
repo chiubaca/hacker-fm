@@ -11,7 +11,9 @@ const PLAYLIST = parsedData.map((track, index) => {
   return {
     index,
     name: track.title,
+    // TODO: need to check for available host up front.
     url: `https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/${track.id}/stream?app_name=HACKERFM`,
+    permaLink: track.permalink,
   };
 });
 
@@ -57,22 +59,33 @@ export function AudioPlayer() {
     }
   };
 
+  const openSongPermalinkHandler = () => {
+    window.open(
+      `https://audius.co${selectedTrack.permaLink}`,
+      "newwindow",
+      "width=800, height=800"
+    );
+  };
+
   return (
     <div>
       <audio
         crossOrigin="anonymous"
-        controls
         ref={audioElement}
         src={PLAYLIST[0].url}
         onEnded={playNextTrackHandler}
       ></audio>
 
-      <div>Selected track is: {selectedTrack.name}</div>
-
       <div className="audio-player">
+        <div className="now-playing">
+          <span> {">"} </span>{" "}
+          <a href="#" onClick={openSongPermalinkHandler}>
+            {selectedTrack.name}
+          </a>
+        </div>
         <canvas ref={canvasContainer} className="orb"></canvas>
 
-        <div className="tracks">
+        {/* <div className="tracks">
           {PLAYLIST.map((track, index) => (
             <button
               key={index}
@@ -84,14 +97,42 @@ export function AudioPlayer() {
               {track.name}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="player-controls">
-          <button onClick={playPreviousTrackHandler}>⏮️</button>
-
-          <button onClick={() => AudioPlayerRef.current.playTrack()}>⏯</button>
-
-          <button onClick={playNextTrackHandler}>⏭️</button>
+          <div
+            className="player-controls__button"
+            onClick={playPreviousTrackHandler}
+          >
+            <svg viewBox="0 0 512 512">
+              <path
+                d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <div
+            className="player-controls__button"
+            onClick={() => AudioPlayerRef.current.playTrack()}
+          >
+            <svg viewBox="0 0 512 512">
+              <path
+                d="M190.06 414l163.12-139.78a24 24 0 0 0 0-36.44L190.06 98c-15.57-13.34-39.62-2.28-39.62 18.22v279.6c0 20.5 24.05 31.56 39.62 18.18z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <div
+            className="player-controls__button"
+            onClick={playNextTrackHandler}
+          >
+            <svg viewBox="0 0 512 512">
+              <path
+                d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
         </div>
       </div>
     </div>

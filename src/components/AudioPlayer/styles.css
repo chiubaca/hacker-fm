@@ -1,22 +1,59 @@
 .audio-player {
-  display: grid;
-  grid-template-areas:
-    "orb tracks"
-    "controls controls";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: green;
 }
 
-.orb {
-  grid-area: orb;
+.now-playing {
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 10px;
+  text-transform: uppercase;
 }
 
-.tracks {
-  grid-area: tracks;
-  overflow-y: scroll;
-  max-height: 300px;
+.now-playing a {
+  color: green;
+  text-decoration: none;
+  border-bottom: 1px dashed green;
+}
+
+.now-playing a:hover {
+  color: lightgreen;
+  border-bottom: 1px dashed lightgreen;
+}
+
+.now-playing span {
+  color: green;
+  animation: blink 1s infinite;
 }
 
 .player-controls {
-  grid-area: controls;
+  color: green;
   display: flex;
   justify-content: space-evenly;
+  gap: 1em;
+  padding-bottom: 10px;
+}
+
+.player-controls__button {
+  cursor: pointer;
+  width: 1.5em;
+}
+
+.player-controls svg {
+  color: green;
+}
+.player-controls svg:hover {
+  color: lightgreen;
+}
+
+/* blink animation */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -15,7 +15,7 @@ const uniforms: Record<string, any> = {
   uDensity: { value: 1 },
   uStrength: { value: 0.8 },
   uDeepPurple: { value: 0.74 },
-  uOpacity: { value: 0.23 },
+  uOpacity: { value: 0.73 },
   uBrightness: {
     value: { x: 0.1, y: 0.15000000000000002, z: -0.44000000000000006 },
   },
@@ -81,7 +81,7 @@ export default class AudioPlayerManager {
      */
     const sizes = {
       width: 300,
-      height: 300,
+      height: 270,
     };
 
     /**
@@ -94,7 +94,7 @@ export default class AudioPlayerManager {
       0.1,
       100
     );
-    camera.position.z = 3;
+    camera.position.z = 2;
     scene.add(camera);
 
     /**
@@ -102,6 +102,7 @@ export default class AudioPlayerManager {
      */
     const renderer = new THREE.WebGLRenderer({
       canvas: this.canvasElem,
+      alpha: true,
     });
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -110,7 +111,7 @@ export default class AudioPlayerManager {
      * Animate
      */
     const tick = () => {
-      orbGeometry.rotateY(0.01);
+      orbGeometry.rotateY(0.005);
       // Render
       renderer.render(scene, camera);
       requestAnimationFrame(tick);
