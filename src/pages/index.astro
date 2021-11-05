@@ -1,5 +1,6 @@
 ---
 import BaseApp from '../components/BaseApp/BaseApp.astro';
+import HeaderBar from '../components/HeaderBar/HeaderBar.astro'
 
 let title = 'H4CKER.FM';
 ---
@@ -17,9 +18,9 @@ let title = 'H4CKER.FM';
     
     <section class='loading-background'></section>
 
-
     <main class='desktop-screen hide'>
-      <BaseApp appName='H4CKER.FM RADIO'/>
+        <HeaderBar />
+        <BaseApp appName='H4CKER.FM RADIO'/>
         <div class='background-80s animated-clouds stars'> 
             <div class="grid"/> 
         </div>
@@ -29,7 +30,6 @@ let title = 'H4CKER.FM';
 
 
 <script>
-
 const text = 
 `
 Initialising boot sequence...
