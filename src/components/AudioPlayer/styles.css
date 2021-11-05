@@ -23,9 +23,14 @@
   border-bottom: 1px dashed lightgreen;
 }
 
-.now-playing span {
+.now-playing .cursor {
   color: green;
   animation: blink 1s infinite;
+}
+.now-playing .song {
+}
+.now-playing .artist {
+  font-size: smaller;
 }
 
 .player-controls {

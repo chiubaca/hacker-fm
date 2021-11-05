@@ -11,6 +11,7 @@ const PLAYLIST = parsedData.map((track, index) => {
   return {
     index,
     name: track.title,
+    artist: track.user.name,
     // TODO: need to check for available host up front.
     url: `https://discoveryprovider.audius4.prod-us-west-2.staked.cloud/v1/tracks/${track.id}/stream?app_name=HACKERFM`,
     permaLink: track.permalink,
@@ -78,9 +79,10 @@ export function AudioPlayer() {
 
       <div className="audio-player">
         <div className="now-playing">
-          <span> {">"} </span>{" "}
+          <span className="cursor"> {">"} </span>
           <a href="#" onClick={openSongPermalinkHandler}>
-            {selectedTrack.name}
+            <span className="song">{selectedTrack.name}</span>
+            <span className="artist"> - {selectedTrack.artist}</span>
           </a>
         </div>
         <canvas ref={canvasContainer} className="orb"></canvas>
