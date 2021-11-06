@@ -32,22 +32,29 @@ let title = 'H4CKER.FM';
 
 
 <script>
+
+window.HAS_INTERACTED = false
+
+const WINDOW_WIDTH = window.innerWidth;
+
 const text = 
 `
 Initialising boot sequence...
+
 Installing outrun.exe
 
 Done!
 
 ::::::::::::::::::::::::::::::::::  
 
-
+${WINDOW_WIDTH < 600 ? '【 ＷＥＬＣＣＯＭＥ　ＴＯ　ＨＡＣＫＥＲ．ＦＭ 】' : 
+`
 ██   ██  █████   ██████ ██   ██ ███████ ██████     ███████ ███    ███ 
 ██   ██ ██   ██ ██      ██  ██  ██      ██   ██    ██      ████  ████ 
 ███████ ███████ ██      █████   █████   ██████     █████   ██ ████ ██ 
 ██   ██ ██   ██ ██      ██  ██  ██      ██   ██    ██      ██  ██  ██ 
 ██   ██ ██   ██  ██████ ██   ██ ███████ ██   ██ ██ ██      ██      ██ 
-                                                                                    
+`}
 
 ::::::::::::::::::::::::::::::::::
 
@@ -66,11 +73,13 @@ function closeLoaderScreen() {
 
 
 loaderScreen.addEventListener('click', () => {
+    window.HAS_INTERACTED = true
     closeLoaderScreen() 
 });
 
 
 document.addEventListener('keydown', (e) => {
+    window.HAS_INTERACTED = true
    closeLoaderScreen() 
 });
 

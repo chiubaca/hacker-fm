@@ -42,7 +42,6 @@ export default class AudioPlayerManager {
     this.audioElem = audioElem;
 
     this.createScene();
-    this.createVisualizer();
   }
 
   playTrack() {
