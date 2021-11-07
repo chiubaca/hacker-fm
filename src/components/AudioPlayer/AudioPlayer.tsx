@@ -34,22 +34,13 @@ export function AudioPlayer() {
       PLAYLIST
     );
 
-    if (window.HAS_INTERACTED && !isSafariBrowser) {
-      AudioPlayerRef.current.createVisualizer();
+    if (window.HAS_INTERACTED && !isSafariBrowser()) {
       AudioPlayerRef.current.playTrack();
       setIsPlaying(true);
     }
   }, []);
 
-  const handleFirstPlayWhenNoInteractionYet = () => {
-    if (!window.HAS_INTERACTED) {
-      console.log("should happen once only");
-      AudioPlayerRef.current.createVisualizer();
-    }
-  };
-
   const playSongHandler = () => {
-    handleFirstPlayWhenNoInteractionYet();
     AudioPlayerRef.current.playTrack();
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   };

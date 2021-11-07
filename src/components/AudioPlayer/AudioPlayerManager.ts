@@ -2,6 +2,7 @@ import * as THREE from "three";
 import * as Meyda from "meyda";
 
 import { fragmentShader, vertexShader } from "./orbShader";
+import { isSafariBrowser } from "../../helpers/detectSafari";
 
 export interface Song {
   index: number;
@@ -40,11 +41,14 @@ export default class AudioPlayerManager {
     this.audioContext = undefined;
     this.canvasElem = canvasElem;
     this.audioElem = audioElem;
-
+    if (window.HAS_INTERACTED && !isSafariBrowser()) {
+      this.createVisualizer();
+    }
     this.createScene();
   }
 
   playTrack() {
+    this.handleFirstPlayWhenNoInteractionYet();
     this.audioElem.paused ? this.audioElem.play() : this.audioElem.pause();
   }
 
@@ -167,5 +171,12 @@ export default class AudioPlayerManager {
     });
 
     analyzer.start();
+  }
+
+  handleFirstPlayWhenNoInteractionYet() {
+    if (!window.HAS_INTERACTED) {
+      this.createVisualizer();
+      window.HAS_INTERACTED = true;
+    }
   }
 }
