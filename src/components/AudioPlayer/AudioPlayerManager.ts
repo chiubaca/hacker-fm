@@ -122,7 +122,8 @@ export default class AudioPlayerManager {
     if (!this.audioElem) {
       return;
     }
-
+    var AudioContext =
+      window.AudioContext || (window as any).webkitAudioContext;
     this.audioContext = new AudioContext();
 
     this.audioElem.crossOrigin = "anonymous";

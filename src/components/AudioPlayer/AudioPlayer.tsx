@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import AudioPlayerManager, { Song } from "./AudioPlayerManager";
 import playlist from "../../../public/playlist.json";
 import { Playlist } from "../../../types/playlist.interface";
+import { isSafariBrowser } from "../../helpers/detectSafari";
 import "./styles.css";
 
 const parsedData = JSON.parse(playlist) as unknown as Playlist;
@@ -33,7 +34,7 @@ export function AudioPlayer() {
       PLAYLIST
     );
 
-    if (window.HAS_INTERACTED) {
+    if (window.HAS_INTERACTED && !isSafariBrowser) {
       AudioPlayerRef.current.createVisualizer();
       AudioPlayerRef.current.playTrack();
       setIsPlaying(true);
@@ -42,6 +43,7 @@ export function AudioPlayer() {
 
   const handleFirstPlayWhenNoInteractionYet = () => {
     if (!window.HAS_INTERACTED) {
+      console.log("should happen once only");
       AudioPlayerRef.current.createVisualizer();
     }
   };
