@@ -35,7 +35,7 @@ const date = new Date();
 const time = document.querySelector('.time');
 
 time.innerHTML = date.toLocaleTimeString();
-const updateTime = (e) => {
+const updateTime = () => {
     time.innerHTML = new Date().toLocaleTimeString();
     window.requestAnimationFrame(updateTime);
 };
@@ -44,7 +44,7 @@ updateTime()
 const dateElement = document.querySelector('.date');
 
 // current day
-const day = date.getDay();
+const day = date.getUTCDate();
 // current month
 const month = date.getMonth() + 1;
 const futuristicYear = date.getFullYear() + 1000
