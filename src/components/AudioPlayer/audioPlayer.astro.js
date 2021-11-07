@@ -1,11 +1,11 @@
 import { dragmove } from "@knadh/dragmove";
 
-const target = document.querySelector(".music-app");
+const appContainer = document.querySelector(".music-app");
 const dragHandler = document.querySelector(".music-app-top-bar");
 
 // Initial position of the music app
-target.style.bottom = `4rem`;
-target.style.left = `1.5rem`;
+appContainer.style.bottom = `4rem`;
+appContainer.style.left = `1.5rem`;
 
 const snapThreshold = 1;
 function onStart(el, x, y) {
@@ -31,7 +31,7 @@ function onEnd(el, x, y) {
     el.style.left = "0px";
   }
 }
-dragmove(target, dragHandler, onStart, onEnd);
+dragmove(appContainer, dragHandler, onStart, onEnd);
 
 /**
  * The app icon stuff
@@ -40,13 +40,21 @@ dragmove(target, dragHandler, onStart, onEnd);
 const appDesktopIcon = document.querySelector(".music-app-desktop-icon");
 const audio = document.querySelector("audio");
 
+let musicIsPaused;
+
 appDesktopIcon.addEventListener("click", () => {
-  target.style.visibility = "visible";
-  audio.play();
+  if (appContainer.style.visibility === "visible") {
+    return;
+  }
+
+  appContainer.style.visibility = "visible";
+
+  musicIsPaused ? null : audio.play();
 });
 
 const closeAppButton = document.querySelector(".close-app");
 closeAppButton.addEventListener("click", () => {
-  target.style.visibility = "hidden";
+  appContainer.style.visibility = "hidden";
+  musicIsPaused = audio.paused ? true : false;
   audio.pause();
 });
