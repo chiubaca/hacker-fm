@@ -6,13 +6,16 @@
 }
 
 .now-playing {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   padding-top: 10px;
   padding-left: 10px;
   text-transform: uppercase;
+  gap: 1rem
 }
 
-.now-playing a {
+.now-playing .song-details {
   color: green;
   text-decoration: none;
   border-bottom: 1px dashed green;

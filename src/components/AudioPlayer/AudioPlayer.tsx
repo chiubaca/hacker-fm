@@ -95,17 +95,17 @@ const AudioPlayer = function () {
       <div className="audio-player">
         <div className="now-playing">
           <span className="cursor">
-            {' '}
             {'>'}
-            {' '}
           </span>
-          <button type="button" href="#" onClick={openSongPermalinkHandler}>
-            <span className="song">{selectedTrack.name}</span>
-            <span className="artist">
-              -
-              {selectedTrack.artist}
-            </span>
-          </button>
+          <span>
+            <button type="button" href="#" onClick={openSongPermalinkHandler}>
+              <span className="song song-details">{selectedTrack.name}</span>
+              <span className="artist song-details">
+                -
+                {selectedTrack.artist}
+              </span>
+            </button>
+          </span>
         </div>
         <canvas ref={canvasContainer} className="orb" />
 
