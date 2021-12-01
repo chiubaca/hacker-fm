@@ -33,6 +33,9 @@
       }
     ],
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
-    "func-names": 0
+    "func-names": 0,
+    "quotes": 0,
+    "comma-dangle": 0,
+    "react/jsx-one-expression-per-line": 0
   }
 }

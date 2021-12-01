@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
-import AudioPlayerManager, { Song } from './AudioPlayerManager';
-import playlist from '../../../public/playlist.json';
-import { Playlist } from '../../../types/playlist.interface';
-import isSafariBrowser from '../../helpers/detectSafari';
-import './styles.css';
+import AudioPlayerManager, { Song } from "./AudioPlayerManager";
+import playlist from "../../../public/playlist.json";
+import { Playlist } from "../../../types/playlist.interface";
+import isSafariBrowser from "../../helpers/detectSafari";
+import "./styles.css";
 
 const parsedData = JSON.parse(playlist) as unknown as Playlist;
 
@@ -30,7 +30,7 @@ const AudioPlayer = function () {
     AudioPlayerRef.current = new AudioPlayerManager(
       canvasContainer.current,
       audioElement.current,
-      PLAYLIST,
+      PLAYLIST
     );
 
     if (window.HAS_INTERACTED && !isSafariBrowser()) {
@@ -77,8 +77,8 @@ const AudioPlayer = function () {
   const openSongPermalinkHandler = () => {
     window.open(
       `https://audius.co${selectedTrack.permaLink}`,
-      'newwindow',
-      'width=800, height=800',
+      "newwindow",
+      "width=800, height=800"
     );
   };
 
@@ -94,15 +94,12 @@ const AudioPlayer = function () {
 
       <div className="audio-player">
         <div className="now-playing">
-          <span className="cursor">
-            {'>'}
-          </span>
+          <span className="cursor">{">"}</span>
           <span>
             <button type="button" href="#" onClick={openSongPermalinkHandler}>
               <span className="song song-details">{selectedTrack.name}</span>
               <span className="artist song-details">
-                -
-                {selectedTrack.artist}
+                - {selectedTrack.artist}
               </span>
             </button>
           </span>
@@ -122,7 +119,11 @@ const AudioPlayer = function () {
               />
             </svg>
           </button>
-          <button type="button" className="player-controls__button" onClick={playSongHandler}>
+          <button
+            type="button"
+            className="player-controls__button"
+            onClick={playSongHandler}
+          >
             {isPlaying ? (
               <svg viewBox="0 0 512 512">
                 <path
