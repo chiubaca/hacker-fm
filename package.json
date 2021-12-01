@@ -10,8 +10,8 @@
     "generatePlaylist": "tsm scripts/generatePlaylist.ts"
   },
   "devDependencies": {
-    "@astrojs/renderer-react": "^0.2.2",
-    "astro": "^0.20.9",
+    "@astrojs/renderer-react": "^0.3.0",
+    "astro": "^0.21.6",
     "tsm": "^2.1.4"
   },
   "dependencies": {
