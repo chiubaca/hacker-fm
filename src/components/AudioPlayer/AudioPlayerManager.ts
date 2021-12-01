@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import * as Meyda from "meyda";
+import * as THREE from 'three';
+import * as Meyda from 'meyda';
 
-import { fragmentShader, vertexShader } from "./orbShader";
-import { isSafariBrowser } from "../../helpers/detectSafari";
+import { fragmentShader, vertexShader } from './orbShader';
+import isSafariBrowser from '../../helpers/detectSafari';
 
 export interface Song {
   index: number;
@@ -27,15 +27,19 @@ const uniforms: Record<string, any> = {
 
 export default class AudioPlayerManager {
   playlist: Song[];
+
   audioElem: HTMLAudioElement;
+
   audioContext: AudioContext | undefined;
+
   canvasElem: HTMLElement;
+
   currentSongId: number;
 
   constructor(
     canvasElem: HTMLElement,
     audioElem: HTMLAudioElement,
-    playlist: Song[] = []
+    playlist: Song[] = [],
   ) {
     this.playlist = playlist;
     this.audioContext = undefined;
@@ -49,7 +53,7 @@ export default class AudioPlayerManager {
 
   playTrack() {
     this.handleFirstPlayWhenNoInteractionYet();
-    this.audioElem.paused ? this.audioElem.play() : this.audioElem.pause();
+    if (this.audioElem.paused) { this.audioElem.play(); } else { this.audioElem.pause(); }
   }
 
   changeTrack(track: Song) {
@@ -95,7 +99,7 @@ export default class AudioPlayerManager {
       75,
       sizes.width / sizes.height,
       0.1,
-      100
+      100,
     );
     camera.position.z = 2;
     scene.add(camera);
@@ -126,11 +130,10 @@ export default class AudioPlayerManager {
     if (!this.audioElem) {
       return;
     }
-    var AudioContext =
-      window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     this.audioContext = new AudioContext();
 
-    this.audioElem.crossOrigin = "anonymous";
+    this.audioElem.crossOrigin = 'anonymous';
 
     const src = this.audioContext.createMediaElementSource(this.audioElem);
     const analyser = this.audioContext.createAnalyser();
@@ -160,7 +163,7 @@ export default class AudioPlayerManager {
       // calculate a variety of audio features, in this case we only want to know
       // the "rms" (root mean square) of the audio signal, which corresponds to its
       // level
-      featureExtractors: ["rms", "energy"],
+      featureExtractors: ['rms', 'energy'],
       // Finally, we provide a function which Meyda will call every time it
       // calculates a new level. This function will be called around 86 times per
       // second.
