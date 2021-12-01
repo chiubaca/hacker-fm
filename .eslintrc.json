@@ -4,7 +4,6 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
         "airbnb"
     ],
@@ -19,7 +18,6 @@
     "plugins": [
         "react",
         "@typescript-eslint"
-    ],
-    "rules": {
-    }
+    ]
+
 }

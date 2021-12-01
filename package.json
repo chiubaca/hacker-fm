@@ -8,7 +8,7 @@
     "build": "yarn generatePlaylist && astro build",
     "preview": "astro preview",
     "generatePlaylist": "tsm scripts/generatePlaylist.ts",
-    "lint": "yarn eslint"
+    "lint": "eslint src/**/*.{js,ts,tsx} --fix"
   },
   "devDependencies": {
     "@astrojs/renderer-react": "^0.3.0",
