@@ -1,10 +1,9 @@
-<script context="module">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import AudioPlayer from '$components/AudioPlayer/AudioPlayer.svelte';
+	import TerminalScreen from '$components/TerminalScreen.svelte';
 </script>
+
+<TerminalScreen />
 
 <main class="desktop">
 	<div class="crt-overlay-effect" />
