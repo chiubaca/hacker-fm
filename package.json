@@ -14,6 +14,7 @@
 	"devDependencies": {
 		"@poppanator/sveltekit-svg": "^0.2.2",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.37",
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.4.1",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
