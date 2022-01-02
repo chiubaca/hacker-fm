@@ -29,7 +29,7 @@ export function makeDraggable(node: HTMLElement): void {
 			el.style.left = '0px';
 		}
 	}
-	dragmove(node, node, onStart, onEnd);
+	dragmove(node, node.firstChild, onStart, onEnd);
 
 	return;
 }
