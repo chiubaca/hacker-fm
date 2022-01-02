@@ -26,3 +26,7 @@
 .hide {
   display: none;
 }
+
+.terminal-text{
+  font-size: clamp(.4rem, 1vw, .8rem);
+}
