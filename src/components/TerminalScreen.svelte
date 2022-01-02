@@ -1,14 +1,5 @@
-<script lang="ts">
-	let isHidden: boolean = false;
-
-	function toggleHidden() {
-		isHidden = true;
-	}
-</script>
-
-<main hidden={isHidden} on:click={toggleHidden}>
-	<div class="terminal">Press any key to continue</div>
-</main>
+<div class="crt-overlay-effect" />
+<div class="terminal">Press any key to continue</div>
 
 <style>
 	.terminal {

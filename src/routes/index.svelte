@@ -1,14 +1,24 @@
 <script lang="ts">
 	import AudioPlayer from '$components/AudioPlayer/AudioPlayer.svelte';
 	import TerminalScreen from '$components/TerminalScreen.svelte';
+
+	let isTerminalHidden: boolean = false;
+
+	function toggleHidden() {
+		isTerminalHidden = true;
+	}
 </script>
 
-<TerminalScreen />
-
-<main class="desktop">
-	<div class="crt-overlay-effect" />
-	<AudioPlayer />
-</main>
+{#if isTerminalHidden}
+	<main class="desktop">
+		<div class="crt-overlay-effect" />
+		<AudioPlayer />
+	</main>
+{:else}
+	<main on:click={toggleHidden}>
+		<TerminalScreen />
+	</main>
+{/if}
 
 <style scoped>
 	@import '../styles/global.css';
