@@ -2,3 +2,29 @@
 	overflow: hidden;
 	font-family: monospace;
 }
+
+p {
+	margin: 0;
+	padding: 1rem 0;
+}
+
+pre {
+	margin: 0;
+	padding: 0;
+}
+
+.crt-overlay-effect {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-image: repeating-linear-gradient(
+		rgba(0, 0, 0, 0.3) 0,
+		transparent 1px,
+		transparent 2px,
+		rgba(0, 0, 0, 0.3) 3px
+	);
+	pointer-events: none;
+	z-index: 99;
+}

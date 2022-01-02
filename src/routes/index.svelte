@@ -4,7 +4,7 @@
 
 	let isTerminalHidden: boolean = false;
 
-	function toggleHidden() {
+	function hideTerminal() {
 		isTerminalHidden = true;
 	}
 </script>
@@ -15,7 +15,7 @@
 		<AudioPlayer />
 	</main>
 {:else}
-	<main on:click={toggleHidden}>
+	<main on:click={hideTerminal} on:keydown={hideTerminal}>
 		<TerminalScreen />
 	</main>
 {/if}
@@ -29,21 +29,5 @@
 		background-image: url('/assets/background-1.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
-	}
-
-	.crt-overlay-effect {
-		width: 100%;
-		height: 100vh;
-		position: fixed;
-		left: 0;
-		top: 0;
-		background-image: repeating-linear-gradient(
-			rgba(0, 0, 0, 0.3) 0,
-			transparent 1px,
-			transparent 2px,
-			rgba(0, 0, 0, 0.3) 3px
-		);
-		pointer-events: none;
-		z-index: 1;
 	}
 </style>
