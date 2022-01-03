@@ -11,6 +11,8 @@ export const volume = writable<number>(0.5);
 export const currentTime = writable<number>(0);
 export const duration = writable<number>(0);
 
+export const ended = writable<boolean>(false);
+
 // this sucks
 const parsedData = JSON.parse(playlist as unknown as string) as unknown as Playlist;
 const PLAYLIST = parsedData.map((track, index) => ({
@@ -43,3 +45,13 @@ export function setPreviousTrack(): void {
 		return PLAYLIST[track.index - 1];
 	});
 }
+
+// this auto plays the next track
+ended.subscribe(async (trackEnded) => {
+	if (trackEnded) {
+		paused.set(true);
+		await setNextTrack();
+		currentTime.set(0);
+		paused.set(false);
+	}
+});
