@@ -21,8 +21,6 @@
 {/if}
 
 <style scoped>
-	@import '../styles/global.css';
-
 	.desktop {
 		background-color: lightgrey;
 		height: 100vh;
