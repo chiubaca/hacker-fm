@@ -1,4 +1,5 @@
 <script lang="ts">
+	import HeaderBar from '$components/HeaderBar/HeaderBar.svelte';
 	import AudioPlayer from '$components/AudioPlayer/AudioPlayer.svelte';
 	import TerminalScreen from '$components/TerminalScreen.svelte';
 
@@ -12,6 +13,7 @@
 {#if isTerminalHidden}
 	<main class="desktop">
 		<div class="crt-overlay-effect" />
+		<HeaderBar />
 		<AudioPlayer />
 	</main>
 {:else}
