@@ -1,13 +1,32 @@
 <script>
-	import CloseIcon from './icons/close.svg';
+	import Close16 from 'carbon-icons-svelte/lib/Close16';
+	import ChevronUp16 from 'carbon-icons-svelte/lib/ChevronUp16';
+	import ChevronDown16 from 'carbon-icons-svelte/lib/ChevronDown16';
+
+	export let minimised = false;
+
+	function minimise() {
+		minimised = minimised ? false : true;
+	}
 </script>
 
 <div class="music-app-top-bar">
-	<span>HACKER FM RADIO</span>
-	<span class="close-app"> <CloseIcon /> </span>
+	<div>HACKER FM RADIO</div>
+	<div class="app-controls">
+		<button class="minimise-app" on:click={minimise}>
+			{#if minimised}
+				<ChevronDown16 />
+			{:else}
+				<ChevronUp16 />
+			{/if}
+		</button>
+		<button class="close-app">
+			<Close16 />
+		</button>
+	</div>
 </div>
 
-<style>
+<style scoped>
 	.music-app-top-bar {
 		display: flex;
 		justify-content: space-between;
@@ -16,9 +35,23 @@
 		width: 100%;
 	}
 
+	.app-controls {
+		display: flex;
+		gap: 0.5rem;
+		color: black;
+		padding: 1px;
+	}
+
+	.minimise-app {
+		height: 20px;
+		/* width: 30px; */
+	}
+	.minimise-app:hover {
+		color: orange;
+	}
+
 	.close-app {
-		width: 20px;
-		cursor: pointer;
+		height: 20px;
 	}
 
 	.close-app:hover {

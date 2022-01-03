@@ -11,6 +11,8 @@
 	import NextIcon from './icons/next.svg';
 	import TopBar from './TopBar.svelte';
 
+	let isMinimised: boolean;
+
 	async function nextTrackHandler() {
 		if (!$paused) {
 			paused.set(true);
@@ -34,10 +36,10 @@
 	}
 </script>
 
-<div class="app-container" use:makeDraggable>
-	<TopBar />
+<div class="app-container " use:makeDraggable>
+	<TopBar bind:minimised={isMinimised} />
 
-	<div class="center">
+	<div hidden class="center {isMinimised ? 'minimised' : ''}">
 		<div class="track">
 			{$currentTrack.index} <br />
 			{$currentTrack.name} <br />
@@ -69,7 +71,7 @@
 	</div>
 </div>
 
-<style>
+<style scoped>
 	.app-container {
 		border: 1px solid #ccc;
 		z-index: 9;
@@ -82,13 +84,8 @@
 		color: green;
 	}
 	.controls button {
-		/* reset button css */
-		padding: 0;
-		border: none;
-		background: none;
-		width: 30px;
 		color: green;
-		cursor: pointer;
+		width: 30px;
 	}
 
 	.controls button:hover {
@@ -107,5 +104,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.minimised {
+		display: none;
 	}
 </style>
