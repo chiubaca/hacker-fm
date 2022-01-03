@@ -3,13 +3,7 @@
 	import TrackSeeker from './TrackSeeker.svelte';
 
 	import { makeDraggable } from '$actions/draggable';
-	import {
-		currentTrack,
-		setNextTrack,
-		setPreviousTrack,
-		paused,
-		currentTime
-	} from './audioPlayerStore';
+	import { currentTrack, setNextTrack, setPreviousTrack, paused } from './audioPlayerStore';
 
 	import PauseIcon from './icons/pause.svg';
 	import PlayIcon from './icons/play.svg';
