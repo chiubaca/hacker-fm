@@ -9,6 +9,7 @@ export const audioElement = writable<HTMLAudioElement>();
 export const paused = writable<boolean>(true);
 export const volume = writable<number>(0.5);
 export const currentTime = writable<number>(0);
+export const duration = writable<number>(0);
 
 // this sucks
 const parsedData = JSON.parse(playlist as unknown as string) as unknown as Playlist;

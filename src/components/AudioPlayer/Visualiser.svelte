@@ -9,7 +9,8 @@
 		currentTime,
 		currentTrack,
 		paused,
-		volume
+		volume,
+		duration
 	} from './audioPlayerStore';
 
 	let canvasContainer: HTMLCanvasElement;
@@ -151,6 +152,7 @@
 	bind:paused={$paused}
 	bind:volume={$volume}
 	bind:currentTime={$currentTime}
+	bind:duration={$duration}
 	crossOrigin="anonymous"
 	src={$currentTrack.url}
 />

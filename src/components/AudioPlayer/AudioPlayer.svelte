@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Visualiser from './Visualiser.svelte';
+	import TrackSeeker from './TrackSeeker.svelte';
 
 	import { makeDraggable } from '$actions/draggable';
 	import {
@@ -43,9 +44,15 @@
 	<TopBar />
 
 	<div class="center">
-		<div class="track">{$currentTrack.index} <br /> {$currentTrack.name} <br /> {$currentTime}</div>
+		<div class="track">
+			{$currentTrack.index} <br />
+			{$currentTrack.name} <br />
+		</div>
 
 		<Visualiser />
+
+		<TrackSeeker />
+
 		<div class="controls">
 			<button on:click={previousTrackHandler}>
 				<PreviousIcon />
